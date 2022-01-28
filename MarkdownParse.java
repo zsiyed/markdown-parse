@@ -24,6 +24,10 @@ public class MarkdownParse {
             if (openParen == -1){
                 break;
             }
+            if (openParen != nextCloseBracket + 1){
+                currentIndex = nextOpenBracket + 1;
+                continue;
+            }
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
@@ -31,6 +35,9 @@ public class MarkdownParse {
             if(nextOpenBracket >= 1 && markdown.charAt(nextOpenBracket-1) == '!') {
                 currentIndex = closeParen + 1;
                 continue;
+            }
+            if (openParen < 0 || closeParen < 0){
+                break;
             }
         }
         return toReturn;
