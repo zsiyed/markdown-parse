@@ -11,7 +11,19 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
+
+            int backticks = markdown.indexOf("```", currentIndex);
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
+
+            // No links can be found inside code block
+            if(backticks != -1 && backticks < nextOpenBracket) {
+                int nextBackticks = markdown.indexOf("```", backticks+1);
+                if (nextBackticks == -1) {
+                    break;
+                }
+                currentIndex = nextBackticks+1;
+                continue;
+            }
             
             if(nextOpenBracket == -1){
                 break;
