@@ -14,7 +14,6 @@ public class MarkdownParse {
 
             int backticks = markdown.indexOf("```", currentIndex);
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
-<<<<<<< HEAD
 
             // No links can be found inside code block
             if(backticks != -1 && backticks < nextOpenBracket) {
@@ -25,9 +24,6 @@ public class MarkdownParse {
                 currentIndex = nextBackticks+1;
                 continue;
             }
-=======
-            
->>>>>>> parent of 5942e12 (fix test 2)
             
             if(nextOpenBracket == -1){
                 break;
