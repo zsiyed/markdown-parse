@@ -9,6 +9,30 @@ import java.util.List;
 
 public class MarkdownParseTest {
     @Test
+    public void testSnippetOne() throws IOException{
+        List<String> expected = List.of("url.com, google.com, google.com, ucsd.edu");
+        Path fileName = Path.of("snippet1.md");
+        String contents = Files.readString(fileName);
+        assertEquals(expected, MarkdownParse.getLinks(contents));
+    }
+
+    @Test
+    public void testSnippetTwo() throws IOException{
+        List<String> expected = List.of("a.com, a(()).com, example.com");
+        Path fileName = Path.of("snippet2.md");
+        String contents = Files.readString(fileName);
+        assertEquals(expected, MarkdownParse.getLinks(contents));
+    }
+    
+    @Test
+    public void testSnippetThree() throws IOException{
+        List<String> expected = List.of("https://www.twitter.com, https://ucsd-cse15l-w22.github.io/, https://cse.ucsd.edu/");
+        Path fileName = Path.of("snippet3.md");
+        String contents = Files.readString(fileName);
+        assertEquals(expected, MarkdownParse.getLinks(contents));
+    }
+    
+    @Test
     public void addition() {
         assertEquals(2, 1 + 1);
     }
